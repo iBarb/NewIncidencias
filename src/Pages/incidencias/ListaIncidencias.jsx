@@ -1,34 +1,21 @@
 import { Button } from "@mui/material";
 import { AlertCircle, CalendarDays, CheckCircle, Clock, Eye, Plus, XCircle } from "lucide-react";
 import { dayjsConZona } from "../../utils/dayjsConfig";
+import DetalleIncidencia from "./DetalleIncidencia";
+import { useState } from "react";
+import { getEstadoBadge } from "../../utils/uiUtils";
 
 
 const ListaIncidencias = ({ data, inicio, fin, estado, isFetching }) => {
 
-    const getEstadoBadge = (estado) => {
-        switch (estado) {
-            case "APROBADO":
-                return {
-                    className: "bg-green-100 text-green-800 hover:bg-green-100",
-                    icon: <CheckCircle className="w-3 h-3" />,
-                }
-            case "RECHAZADO":
-                return {
-                    className: "bg-red-100 text-red-800 hover:bg-red-100",
-                    icon: <XCircle className="w-3 h-3" />,
-                }
-            case "PENDIENTE":
-                return {
-                    className: "bg-yellow-100 text-yellow-800 hover:bg-yellow-100",
-                    icon: <AlertCircle className="w-3 h-3" />,
-                }
-            default:
-                return {
-                    className: "bg-gray-100 text-gray-800 hover:bg-gray-100",
-                    icon: <AlertCircle className="w-3 h-3" />,
-                }
-        }
-    }
+    const [SelectedIncidencia, setSelectedIncidencia] = useState({})
+    const [open, setOpen] = useState(false);
+    const handleOpen = (incidencia) => {
+        setOpen(true);
+        setSelectedIncidencia(incidencia);
+        
+    };
+    const handleClose = () => setOpen(false);
 
     return (
         <div className="space-y-4">
@@ -84,7 +71,7 @@ const ListaIncidencias = ({ data, inicio, fin, estado, isFetching }) => {
                                 )}
 
                                 <button
-                                    onClick={() => handleVerDetalle(incidencia)}
+                                    onClick={() => handleOpen(incidencia)}
                                     className="w-full flex items-center justify-center font-medium gap-2 px-4 py-2 border border-gray-300 text-sm rounded-md text-gray-900 hover:bg-gray-100 cursor-pointer transition"
                                 >
                                     <Eye className="w-4 h-4" />
@@ -95,6 +82,12 @@ const ListaIncidencias = ({ data, inicio, fin, estado, isFetching }) => {
                     )
                 })}
             </>}
+
+            <DetalleIncidencia
+                open={open}
+                handleClose={handleClose}
+                data={SelectedIncidencia}
+            />
         </div>
     );
 };

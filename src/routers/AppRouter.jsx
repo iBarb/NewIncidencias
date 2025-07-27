@@ -13,7 +13,7 @@ const AppRouter = () => {
         <Route path="/verificacion" element={<PublicRouter element={<FaceVerification />} />} />
         <Route path="/" element={<PrivateRouter element={<Layout />} />}>
           <Route path="/" element={<LayoutIncidencias />} />
-          <Route path="/nueva" element={<ListaIncidencias />} />
+          <Route path="/nueva" element={<Number />} />
           <Route path="/perfil" element={<ListaIncidencias />} />
         </Route>
       </Routes>

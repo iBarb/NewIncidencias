@@ -5,6 +5,7 @@ import PrivateRouter from './PrivateRouter';
 import ListaIncidencias from '../Pages/incidencias/ListaIncidencias';
 import Layout from '../Pages/Layout';
 import LayoutIncidencias from '../Pages/incidencias/LayoutIncidencias';
+import NuevaIncidencia from '../Pages/incidencias/Registrar/NuevaIncidencia';
 
 const AppRouter = () => {
   return (
@@ -13,7 +14,7 @@ const AppRouter = () => {
         <Route path="/verificacion" element={<PublicRouter element={<FaceVerification />} />} />
         <Route path="/" element={<PrivateRouter element={<Layout />} />}>
           <Route path="/" element={<LayoutIncidencias />} />
-          <Route path="/nueva" element={<Number />} />
+          <Route path="/nueva" element={<NuevaIncidencia />} />
           <Route path="/perfil" element={<ListaIncidencias />} />
         </Route>
       </Routes>
